@@ -1,0 +1,124 @@
+{
+   "width" : 2800,
+   "height" : 200,
+
+   "data" : [
+    {
+      "name" : "country",
+      "format" : "json",
+      "url" : "h12/country2.json"
+    }
+   ],
+   "scales" : 
+   [
+   {
+      "name" : "x",
+      "type" : "ordinal",
+      "domain" : {"data": "country", "field" : "Name"},
+      "range" : "width",
+      "nice" : true,
+      "points" : true,
+      "padding" : 0.005
+   },
+   {
+      "name" : "y",
+      "type" : "linear",
+      "domain" : {"data": "country", "field" : "Population"},
+      "range" : "height",
+      "nice" : true
+   }
+   ],
+
+   "signals" :
+   [
+   {
+      "name" : "hover",
+      "init" : {},
+      "streams" : [
+         {"type" : "symbol:mouseover", "expr": "datum"},
+         {"type" : "symbol:mouseout", "expr": "{}"}
+      ]
+   }
+   ],
+
+   "predicates" : [
+   {
+      "name" : "hover",
+      "type" : "==",
+      "operands" : [{"signal": "hover._id"}, {"arg": "id"}]
+   }
+   ],
+
+   "axes" : [
+   {
+      "type" : "x",
+      "scale" : "x",
+      "ticks" : "width",
+      "tickSize" : 0,
+      "grid" : true,
+      "layer" : "back",
+      "properties" : {
+         "axis" : {"stroke" : {"value" : "transparent"}},
+         "labels" : {
+            "fill" : {"value" : "#fff"}
+         }
+      }
+   },
+   {
+      "type" : "y",
+      "title" : "Population",
+      "scale" : "y",
+      "ticks" : 5,
+      "tickSize" : 0,
+      "grid" : true,
+      "layer" : "back",
+      "properties" : {
+         "axis" : {"stroke" : {"value" : "transparent"}}
+      }
+   }
+   ],
+
+   "marks": [
+   {
+      "type" : "line",
+      "from" : {"data" : "country"},
+      "properties" : {
+         "enter" : {
+            "interpolate" : {"value" : "cardinal"},
+            "x" : {"scale" : "x", "field" : "Name"},
+            "y" : {"scale" : "y", "field" : "Population"},
+            "stroke" : {"value" : "#9c9"},
+            "strokeWidth" : {"value" : 3} 
+         }
+      }
+   },
+   {
+      "type" : "symbol",
+      "name" : "dots",
+      "from" : {"data" : "country"},
+      "properties" : {
+         "enter" : {
+            "x" : {"scale" : "x", "field" : "Name"},
+            "y" : {"scale" : "y", "field" : "Population" },
+            "stroke" : {"value" : "#000"},
+            "strokeWidth" : {"value" : 1 },
+            "size": {"value" : 49}
+         },
+         "update" : {
+            "fill" : {
+               "rule" : [
+               {
+                  "predicate" : {
+                     "name" : "hover",
+                     "id" : {"field": "_id"}
+                  },
+                  "value" : "green"
+               },
+               {"value" : "#dfd"}
+               ]
+            }
+         }
+      }
+   }
+   ]
+}

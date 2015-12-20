@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title>Vega Scaffold</title>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.min.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.geo.projection.min.js"></script>
+    <script src="/h12/homework.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/topojson.js"></script>
+    <script src="http://vega.github.io/vega-editor/vendor/d3.layout.cloud.js"></script>
+    <script src="http://vega.github.io/vega/vega.min.js"></script>
+
+    
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <a href="hm.html">Here</a>
+    <div id="vis"></div>
+    <pre id="vis-source"></pre>
+    <hr>
+    <h2>Two Line plots</h1>
+    <div id="vis2a"></div>
+    <div id="vis2b"></div>
+    <pre id="vis2a-source"></pre>
+    <pre id="vis2b-source"></pre>
+    <hr>
+    <h2>A Phase Diagram</h1>
+    <div id="vis3"></div>
+    <pre id="vis3-source"></pre>
+
+    <hr>
+    <h2>Country Plot</h1>
+    <div id="countr"></div>
+    <pre id="countr-source"></pre>
+
+    <hr>
+  </body>
+<script src="vega_helpers.js"></script>
+<script src="main.js"></script>
+<script type="text/javascript">
+  // parse a spec and create a visualization view
+  document.getElementById("vis-source").innerText = JSON.stringify(get_vega_spec().run("#vis").spec(), null, '  ');
+  var l = get_bad_driving_spec();
+  document.getElementById("vis2a-source").innerText = JSON.stringify(l[0].run("#vis2a").spec(), null, '  ');
+  document.getElementById("vis2b-source").innerText = JSON.stringify(l[1].run("#vis2b").spec(), null, '  ');
+  get_driving_spec().run("#vis3");
+  document.getElementById("vis3-source").innerText = JSON.stringify(get_driving_spec().run("#vis3").spec(), null, '  ');
+  
+  document.getElementById("countr-source").innerText = JSON.stringify(get_vega_spec().run("#countr").spec(), null, '  ');
+</script>
+</html>
