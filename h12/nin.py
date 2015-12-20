@@ -1,3 +1,16 @@
+'''
+Simple code to dequote the following fields:
+ - Population
+ - LifeExpectancy
+ - GNP
+ - SurfaceArea
+
+Also adds -1.0 for empty fields that are described above
+
+Python 3.4 recommended
+'''
+
+
 def write_file( filename ):
    thefile = open(filename)
 
